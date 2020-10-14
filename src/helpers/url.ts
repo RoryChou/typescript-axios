@@ -1,5 +1,6 @@
 import { isDate, isObject } from "./util";
 
+// fixme 为啥这些字符串要还原呢
 function encode(val:string):string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
