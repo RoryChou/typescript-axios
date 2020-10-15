@@ -16,6 +16,9 @@ module.exports = {
    * entries 是一个对象，key 为目录名
    * */
   // fixme 没看懂，这块entry对象最后的值为啥是数组?
+  // 当你向 entry 传入一个数组时会发生什么？
+  // 向 entry 属性传入文件路径数组，将创建出一个 多主入口(multi-main entry)。
+  // 在你想要一次注入多个依赖文件，并且将它们的依赖导向(graph)到一个 chunk 时，这种方式就很有用。
   //{ simple:
   //    [ 'webpack-hot-middleware/client',
   //      'E:\\project\\study\\ts-axios-doc\\typescript-library-starter\\example
@@ -34,6 +37,7 @@ module.exports = {
    * 根据不同的目录名称，打包生成目标js，名称和目录名一致
    * */
   // fixme 没看懂，__build__这是啥
+  // 这个是devserver的publicPath
   output: {
     path: path.join(__dirname, '__build__'),
     filename: "[name].js",
@@ -67,6 +71,7 @@ module.exports = {
     ]
   },
   // fixme 补充解析文件类型？
+  // 补充webpack解析文件的类型，没有明确文件后缀的时候用的
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
