@@ -70,11 +70,35 @@ axios({
   }
 })
 
+axios({
+  method: "post",
+  url: '/base/post',
+  headers: {
+    'content-type': 'application/json',
+    'Accept': 'application/json, text/plain, */*',
+  },
+  data: {
+    a: 1,
+    b: 2
+  }
+})
+
 const arr = new Int32Array([21,31])
 
 axios({
   method: "post",
   url: '/base/buffer',
   data: arr
+})
+
+const paramString = 'q=URLUtils.searchParams&topic=api'
+const searchParams = new URLSearchParams(paramString)
+
+// fixme 浏览器自动添加headers，formdata也可以做到
+// Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+axios({
+  method: "post",
+  url: '/base/post',
+  data: searchParams
 })
 
