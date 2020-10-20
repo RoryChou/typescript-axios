@@ -13,4 +13,18 @@ export interface AxiosRequestConfig {
   data?: any,
   params?: any,
   headers?: any
+  responseType?: XMLHttpRequestResponseType
+}
+
+export interface AxiosResponse {
+  status: number,
+  statusText: string,
+  data: any,
+  config: AxiosRequestConfig,
+  headers: any
+  request: any
+}
+
+export interface AxiosPromise extends Promise<AxiosResponse> {
+
 }

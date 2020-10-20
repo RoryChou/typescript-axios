@@ -68,19 +68,28 @@ axios({
     a: 1,
     b: 2
   }
+}).then(res => {
+  console.log('res', res)
+}).catch(err => {
+  console.log(err)
 })
 
 axios({
   method: "post",
   url: '/base/post',
+  responseType: 'json',
   headers: {
     'content-type': 'application/json',
     'Accept': 'application/json, text/plain, */*',
   },
   data: {
-    a: 1,
-    b: 2
+    a: 3,
+    b: 4
   }
+}).then(res => {
+  console.log('res', res)
+}).catch(err => {
+  console.log(err)
 })
 
 const arr = new Int32Array([21,31])
