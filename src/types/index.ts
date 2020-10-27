@@ -1,30 +1,36 @@
-
-export type Method = 'get' | 'GET'
-| 'delete' | 'DELETE'
-| 'head' | 'HEAD'
-| 'options' | 'OPTIONS'
-| 'post' | 'POST'
-| 'put' | 'PUT'
-| 'patch' | 'PATCH'
+export type Method =
+  | 'get'
+  | 'GET'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'options'
+  | 'OPTIONS'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'patch'
+  | 'PATCH'
 
 export interface AxiosRequestConfig {
-  url: string,
-  method?: Method,
-  data?: any,
-  params?: any,
+  url: string
+  method?: Method
+  data?: any
+  params?: any
   headers?: any
   responseType?: XMLHttpRequestResponseType
+  timeOut?: number
 }
 
 export interface AxiosResponse {
-  status: number,
-  statusText: string,
-  data: any,
-  config: AxiosRequestConfig,
+  status: number
+  statusText: string
+  data: any
+  config: AxiosRequestConfig
   headers: any
   request: any
 }
 
-export interface AxiosPromise extends Promise<AxiosResponse> {
-
-}
+export interface AxiosPromise extends Promise<AxiosResponse> {}

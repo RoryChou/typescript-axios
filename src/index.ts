@@ -8,6 +8,9 @@ function axios(config: AxiosRequestConfig): AxiosPromise {
   // TODO
   processConfig(config)
   return xhr(config).then(res => {
+    // fixme 后续可以链式调用then()
+    // then()的返回值是一个新的promise
+    //  第一个回调函数完成以后，会将返回结果作为参数，传入第二个回调函数。
     return transformResponseData(res)
   })
 }
