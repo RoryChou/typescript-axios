@@ -1,6 +1,7 @@
-import {AxiosRequestConfig,AxiosPromise,AxiosResponse} from './types';
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
+import { parseHeaders } from './helpers/headers'
 
-export default function xhr(config: AxiosRequestConfig):AxiosPromise {
+export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     const { data = null, url, method = 'get', headers, responseType } = config
 
@@ -10,14 +11,14 @@ export default function xhr(config: AxiosRequestConfig):AxiosPromise {
       request.responseType = responseType
     }
 
-    request.open(method.toUpperCase(),url,true)
+    request.open(method.toUpperCase(), url, true)
 
-    request.onreadystatechange = function handleLoad () {
-      if(request.readyState !== 4) {
+    request.onreadystatechange = function handleLoad() {
+      if (request.readyState !== 4) {
         return
       }
-
-      const responseHeaders = request.getAllResponseHeaders()
+      // 将getAllResponseHeaders得到的字符串格式化为json
+      const responseHeaders = parseHeaders(request.getAllResponseHeaders())
       const responseData = request.responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
         data: responseData,
@@ -31,7 +32,7 @@ export default function xhr(config: AxiosRequestConfig):AxiosPromise {
     }
 
     Object.keys(headers).forEach(name => {
-      if(data === null && name.toLowerCase() === 'content-type') {
+      if (data === null && name.toLowerCase() === 'content-type') {
         delete headers[name]
       } else {
         request.setRequestHeader(name, headers[name])
@@ -40,5 +41,4 @@ export default function xhr(config: AxiosRequestConfig):AxiosPromise {
 
     request.send(data)
   })
-
 }
