@@ -1,4 +1,4 @@
-import axios from '../../src/index'
+import axios, { AxiosError } from '../../src/index'
 import set = Reflect.set;
 
 axios({
@@ -36,6 +36,10 @@ axios({
   method: 'get'
 }).then(res => {
   console.log('success timeout', res)
-}).catch(err => {
-  console.log('error timeout', err)
+}).catch((err:AxiosError) => {
+  console.log('error timeout message : ', err.message)
+  console.log('error timeout code : ', err.code)
+  console.log('error timeout request : ', err.request)
+  console.log('error timeout config : ', err.config)
+  console.log('error timeout config : ', err.isAxiosError)
 })

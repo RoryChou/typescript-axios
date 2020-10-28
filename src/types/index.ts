@@ -32,5 +32,13 @@ export interface AxiosResponse {
   headers: any
   request: any
 }
-
+// FIXME 看不懂呢
 export interface AxiosPromise extends Promise<AxiosResponse> {}
+
+export interface AxiosError extends Error {
+  isAxiosError: boolean
+  config: AxiosRequestConfig
+  code?: string | null
+  request?: any
+  response?: AxiosResponse
+}
