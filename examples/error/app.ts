@@ -1,5 +1,4 @@
 import axios, { AxiosError } from '../../src/index'
-import set = Reflect.set;
 
 axios({
   url: '/error/404',
