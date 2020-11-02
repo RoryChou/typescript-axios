@@ -1,4 +1,4 @@
-import axios, { AxiosError } from '../../src/index'
+import axios from '../../src/index'
 
 
 axios({
@@ -29,5 +29,13 @@ axios.put('extend/put', {
 })
 axios.patch('extend/patch', {
   msg: 'patch'
+})
+
+axios('extend/post',{
+  url: '/extend/post',
+  method: 'post',
+  data: {
+    msg: 'hi'
+  }
 })
 
