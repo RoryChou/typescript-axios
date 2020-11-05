@@ -5,7 +5,7 @@ interface Interceptor<T> {
   rejected?: RejectedFn
 }
 // 泛型类
-export class interceptorManager<T> {
+export default class InterceptorManager<T> {
   private interceptors: Array<Interceptor<T> | null>
 
   constructor() {
