@@ -35,7 +35,6 @@ export default function mergeConfig(
     if (!config2[key]) {
       mergeField(key)
     }
-    mergeField(key)
   }
 
   function mergeField(key: string): void {
