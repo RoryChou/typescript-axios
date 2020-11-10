@@ -1,4 +1,4 @@
-import axios from '../../src/index'
+import axios, {AxiosTransformer} from '../../src/index'
 import qs from 'qs'
 
 axios.defaults.headers.common['test2'] = '123'
@@ -9,7 +9,16 @@ axios({
   headers: {
     test: '321'
   },
-  data: qs.stringify({a:1})
+  data: {a:1},
+  transformRequest: [(function (data) {
+    return qs.stringify(data)
+  }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
+  transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), function (data) {
+    if(typeof data === 'object') {
+      data.b = 2
+    }
+    return data
+  }]
 }).then(res => {
   console.log('success: ', res)
 }).catch(err => {
