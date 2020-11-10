@@ -46,7 +46,7 @@ export default class Axios {
     }
 
     // 合并config
-    mergeConfig(this.defaults, config)
+    config = mergeConfig(this.defaults, config)
 
     // 拦截器，链式调用promise
     // 将发送请求放在中间，request的拦截器依次加载前面，response的拦截器加载后面，形成一个完整的链
