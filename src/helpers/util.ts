@@ -20,3 +20,27 @@ export function extend(to: any, from: any) {
   }
   return to
 }
+
+export function deepMerge(...objs: any[]): any {
+  const result = Object.create(null)
+
+  objs.forEach(obj => {
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        const val = obj[key]
+        if (isPlainObject(val)) {
+          // 判断是否已经有这个属性了
+          if (isPlainObject(result[key])) {
+            result[key] = deepMerge(val, result[key])
+          } else {
+            result[key] = deepMerge(val)
+          }
+        } else {
+          result[key] = val
+        }
+      })
+    }
+  })
+
+  return result
+}
