@@ -3,13 +3,10 @@ import qs from 'qs'
 
 axios.defaults.headers.common['test2'] = '123'
 
-axios({
-  url: '/config/post',
-  method:'post',
+const instance = axios.creat({
   headers: {
     test: '321'
   },
-  data: {a:1},
   transformRequest: [(function (data) {
     return qs.stringify(data)
   }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
@@ -19,6 +16,12 @@ axios({
     }
     return data
   }]
+})
+
+instance({
+  url: '/config/post',
+  method:'post',
+  data: {a:1}
 }).then(res => {
   console.log('success: ', res)
 }).catch(err => {

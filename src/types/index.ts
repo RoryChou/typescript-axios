@@ -22,8 +22,8 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeOut?: number
-  transformRequest?: AxiosTransformer|AxiosTransformer[]
-  transformResponse?: AxiosTransformer|AxiosTransformer[]
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
 
   [propName: string]: any
 }
@@ -71,6 +71,11 @@ export interface AxiosInstance extends Axios {
   (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
 
+// 扩展Axios静态方法
+export interface AxiosStatic extends AxiosInstance {
+  creat(config?: AxiosRequestConfig): AxiosInstance
+}
+
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
   eject(id: number): void
@@ -89,5 +94,5 @@ export interface RejectedFn {
 }
 
 export interface AxiosTransformer {
-  (data:any,headers?:any):any
+  (data: any, headers?: any): any
 }
