@@ -57,6 +57,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       }
     })
 
+    // 这里是中断请求的核心
+    // 等待取消指令的触发，触发后，将promise的状态变为resolved
     if (cancelToken) {
       cancelToken.promise.then(reason => {
         request.abort()

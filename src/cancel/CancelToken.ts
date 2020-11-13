@@ -19,12 +19,13 @@ export default class CancelToken {
       // 防止频繁调用
       if (this.reason) return
       this.reason = new Cancel(message)
+      // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved）
       resolvePromise(this.reason)
     })
   }
 
   throwIfRequested() {
-    if(this.reason) {
+    if (this.reason) {
       throw this.reason
     }
   }

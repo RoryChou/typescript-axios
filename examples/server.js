@@ -84,7 +84,7 @@ router.post('/config/post', function (req, res) {
   res.json(req.body)
 })
 
-router.get('/cancel/post', function (req, res) {
+router.get('/cancel/get', function (req, res) {
   setTimeout(() => {
     res.json('hello')
   }, 1000)

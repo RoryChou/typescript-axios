@@ -109,6 +109,8 @@ export default class Axios {
   }
 
   _requestMethodWithoutData(method: Method, url: string, config?: AxiosRequestConfig) {
+    // 合并config
+    config = mergeConfig(this.defaults, config)
     return dispatchRequest(
       Object.assign(config || {}, {
         method,
@@ -118,6 +120,8 @@ export default class Axios {
   }
 
   _requestMethodWithData(method: Method, url: string, data?: any, config?: AxiosRequestConfig) {
+    // 合并config
+    config = mergeConfig(this.defaults, config)
     return dispatchRequest(
       Object.assign(config || {}, {
         method,
