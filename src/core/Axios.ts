@@ -125,7 +125,8 @@ export default class Axios {
     return dispatchRequest(
       Object.assign(config || {}, {
         method,
-        url
+        url,
+        data
       })
     )
   }

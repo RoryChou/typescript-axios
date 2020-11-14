@@ -3,10 +3,14 @@ const bodyParser = require('body-parser')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+const cookieParser = require('cookie-parser')
 const config = require('./webpack.config')
+
+require('./server2')
 
 const app = express()
 const compiler = webpack(config)
+app.use(cookieParser())
 
 /**
  * No files are written to disk, rather it handles files in memory
@@ -94,6 +98,10 @@ router.post('/cancel/post', function (req, res) {
   setTimeout(() => {
     res.json(req.body)
   }, 1000)
+})
+
+router.get('/more/get', function (req, res) {
+  res.json(req.cookies)
 })
 
 app.use(router)

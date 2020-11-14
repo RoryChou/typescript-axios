@@ -25,6 +25,7 @@ export interface AxiosRequestConfig {
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
+  withCredentials?: boolean
 
   [propName: string]: any
 }
@@ -133,5 +134,5 @@ export interface Cancel {
 }
 
 export interface CancelStatic {
-  new(message:string): Cancel
+  new (message: string): Cancel
 }
