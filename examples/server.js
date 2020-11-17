@@ -27,7 +27,11 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-app.use(express.static(__dirname))
+app.use(express.static(__dirname, {
+  setHeaders (res) {
+    res.cookie('XSFR-COOKIE-D', '123asd')
+  }
+}))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
