@@ -7,6 +7,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const cookieParser = require('cookie-parser')
 const config = require('./webpack.config')
 const path = require('path')
+const atob = require('atob')
 
 require('./server2')
 
@@ -117,6 +118,19 @@ router.get('/more/get', function (req, res) {
 router.post('/more/upload', function (req, res) {
   console.log(req.body,req.files)
   res.end('upload success')
+})
+
+router.post('/more/post', function (req, res) {
+  const auth = req.headers.authorization
+  const [type, credentials] = auth.split(' ')
+
+  const [username, password] = atob(credentials).split(':')
+  if(type === 'Basic' && username === 'asd' && password === '123') {
+    res.json(req.body)
+  } else {
+    res.status(401)
+    res.end('Unauthorization')
+  }
 })
 
 app.use(router)
