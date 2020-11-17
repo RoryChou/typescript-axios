@@ -1,10 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const webpack = require('webpack')
+const multipart = require('connect-multiparty')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const cookieParser = require('cookie-parser')
 const config = require('./webpack.config')
+const path = require('path')
 
 require('./server2')
 
@@ -31,6 +33,10 @@ app.use(express.static(__dirname, {
   setHeaders (res) {
     res.cookie('XSFR-COOKIE-D', '123asd')
   }
+}))
+
+app.use(multipart({
+  uploadDir: path.resolve(__dirname,'upload-file')
 }))
 
 app.use(bodyParser.json())
@@ -106,6 +112,11 @@ router.post('/cancel/post', function (req, res) {
 
 router.get('/more/get', function (req, res) {
   res.json(req.cookies)
+})
+
+router.post('/more/upload', function (req, res) {
+  console.log(req.body,req.files)
+  res.end('upload success')
 })
 
 app.use(router)

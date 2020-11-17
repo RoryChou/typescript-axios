@@ -14,6 +14,10 @@ export function isPlainObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }
 
+export function isFormdata(val: any): boolean {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+
 export function extend(to: any, from: any) {
   for (const key in from) {
     to[key] = from[key]
