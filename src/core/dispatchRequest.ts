@@ -1,8 +1,8 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 import xhr from './xhr'
-import { buildURL } from '../helpers/url'
+import { buildURL, combineURL, isAbsoluteURL } from '../helpers/url'
 import { flattenHeaders } from '../helpers/headers'
-import {transform} from "./transform";
+import { transform } from './transform'
 
 export default function dispatch(config: AxiosRequestConfig): AxiosPromise {
   // TODO
@@ -19,12 +19,15 @@ export default function dispatch(config: AxiosRequestConfig): AxiosPromise {
 function processConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
   // config.headers = transformHeaders(config)
-  config.data = transform(config.data,config.headers,config.transformRequest)
+  config.data = transform(config.data, config.headers, config.transformRequest)
   config.headers = flattenHeaders(config.headers, config.method!)
 }
 
 function transformURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
+  let { url, params, baseURL } = config
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURL(baseURL, url)
+  }
   // fixme 断言非空
   return buildURL(url!, params)
 }
@@ -39,12 +42,12 @@ function transformURL(config: AxiosRequestConfig): string {
 // }
 
 function transformResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transform(res.data,res.headers,res.config.transformResponse)
+  res.data = transform(res.data, res.headers, res.config.transformResponse)
   return res
 }
 
-function throwIfCancellationRequested(config: AxiosRequestConfig):void {
-  if(config.cancelToken) {
+function throwIfCancellationRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
     config.cancelToken.throwIfRequested()
   }
 }

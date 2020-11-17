@@ -82,16 +82,24 @@ import nprogress from 'nprogress'
 
 
 // auth
-axios.post('/more/post', {
-  a:1
-},{
-  auth: {
-    username: 'asd',
-    password: '123'
-  }
-}).then(res => {
-  console.log(res)
+// axios.post('/more/post', {
+//   a:1
+// },{
+//   auth: {
+//     username: 'asd',
+//     password: '123'
+//   }
+// }).then(res => {
+//   console.log(res)
+// })
+
+// baseURL
+const instance = axios.creat({
+  baseURL: 'https://img.mukewang.com/'
 })
+
+instance.get('abc.jpg')
+instance.get('http://www.baidu.com/abc.jpg')
 
 
 

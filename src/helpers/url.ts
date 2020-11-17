@@ -59,6 +59,14 @@ export function buildURL(url: string, params?: any): string {
   return url
 }
 
+export function isAbsoluteURL(url: string): boolean {
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
+}
+
 export function isURLSameOrigin(requestUrl: string): boolean {
   const parsedOrigin = resolveURL(requestUrl)
   return (
