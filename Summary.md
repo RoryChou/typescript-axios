@@ -102,6 +102,7 @@ request.send(data)
      2. Object.prototype.toString.call()
      3. instanceof
   2. 对象深拷贝
+    没直接用Object.assign,而是自己写的
   3. 正则获取cookie
   
   `const cookie = {

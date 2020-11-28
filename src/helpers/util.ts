@@ -25,6 +25,7 @@ export function extend(to: any, from: any) {
   return to
 }
 
+// todo 为啥不用Object.asssign呢？
 export function deepMerge(...objs: any[]): any {
   const result = Object.create(null)
 
